@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jdbcDataAdapter class="net.sf.jasperreports.data.jdbc.JdbcDataAdapterImpl"><name>Softi2 Crazybits Data Adapter</name><driver>com.mysql.jdbc.Driver</driver><username>softi</username><password>softi12</password><savePassword>true</savePassword><url>jdbc:mysql://crazybits.de/SOFTI2</url><database></database><serverAddress></serverAddress><classpath>/Users/ridvan/NetBeansProjects/Libs/mysql/mysql-connector-java-5.1.39-bin.jar</classpath></jdbcDataAdapter>
