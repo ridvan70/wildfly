@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InOutViewDlg" widgetVar="InOutViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewInOutTitle}">
+            <h:form id="InOutViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{inOutController.selected != null}">
+                        <h:outputText value="#{bundle.ViewInOutLabel_ioId}"/>
+                        <h:outputText value="#{inOutController.selected.ioId}" title="#{bundle.ViewInOutTitle_ioId}"/>
+                        <h:outputText value="#{bundle.ViewInOutLabel_ioDate}"/>
+                        <h:outputText value="#{inOutController.selected.ioDate}" title="#{bundle.ViewInOutTitle_ioDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewInOutLabel_ioDesc}"/>
+                        <h:outputText value="#{inOutController.selected.ioDesc}" title="#{bundle.ViewInOutTitle_ioDesc}"/>
+                        <h:outputText value="#{bundle.ViewInOutLabel_ioVat}"/>
+                        <h:outputText value="#{inOutController.selected.ioVat}" title="#{bundle.ViewInOutTitle_ioVat}"/>
+                        <h:outputText value="#{bundle.ViewInOutLabel_ioOut}"/>
+                        <h:outputText value="#{inOutController.selected.ioOut}" title="#{bundle.ViewInOutTitle_ioOut}"/>
+                        <h:outputText value="#{bundle.ViewInOutLabel_ioIn}"/>
+                        <h:outputText value="#{inOutController.selected.ioIn}" title="#{bundle.ViewInOutTitle_ioIn}"/>
+                        <h:outputText value="#{bundle.ViewInOutLabel_ioTimestamp}"/>
+                        <h:outputText value="#{inOutController.selected.ioTimestamp}" title="#{bundle.ViewInOutTitle_ioTimestamp}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewInOutLabel_ioPaymentType}"/>
+                        <h:outputText value="#{inOutController.selected.ioPaymentType}" title="#{bundle.ViewInOutTitle_ioPaymentType}"/>
+                        <h:outputText value="#{bundle.ViewInOutLabel_ioAccount}"/>
+                        <h:outputText value="#{inOutController.selected.ioAccount}" title="#{bundle.ViewInOutTitle_ioAccount}"/>
+                        <h:outputText value="#{bundle.ViewInOutLabel_ioCurrency}"/>
+                        <h:outputText value="#{inOutController.selected.ioCurrency}" title="#{bundle.ViewInOutTitle_ioCurrency}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="InOutViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

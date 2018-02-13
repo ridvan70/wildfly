@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserEditDlg" widgetVar="UserEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditUserTitle}">
+            <h:form id="UserEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditUserLabel_usrId}" for="usrId" />
+                        <p:inputText id="usrId" value="#{userController.selected.usrId}" title="#{bundle.EditUserTitle_usrId}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_usrId}"/>
+                        <p:outputLabel value="#{bundle.EditUserLabel_usrFirstname}" for="usrFirstname" />
+                        <p:inputText id="usrFirstname" value="#{userController.selected.usrFirstname}" title="#{bundle.EditUserTitle_usrFirstname}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_usrFirstname}"/>
+                        <p:outputLabel value="#{bundle.EditUserLabel_usrLastname}" for="usrLastname" />
+                        <p:inputText id="usrLastname" value="#{userController.selected.usrLastname}" title="#{bundle.EditUserTitle_usrLastname}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_usrLastname}"/>
+                        <p:outputLabel value="#{bundle.EditUserLabel_usrPwd}" for="usrPwd" />
+                        <p:inputText id="usrPwd" value="#{userController.selected.usrPwd}" title="#{bundle.EditUserTitle_usrPwd}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_usrPwd}"/>
+                        <p:outputLabel value="#{bundle.EditUserLabel_usrEmail}" for="usrEmail" />
+                        <p:inputText id="usrEmail" value="#{userController.selected.usrEmail}" title="#{bundle.EditUserTitle_usrEmail}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_usrEmail}"/>
+                        <p:outputLabel value="#{bundle.EditUserLabel_usrLanguage}" for="usrLanguage" />
+                        <p:inputText id="usrLanguage" value="#{userController.selected.usrLanguage}" title="#{bundle.EditUserTitle_usrLanguage}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_usrLanguage}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{userController.update}" value="#{bundle.Save}" update="display,:UserListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UserEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UserEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

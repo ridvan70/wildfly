@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DrivesCreateDlg" widgetVar="DrivesCreateDlg" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDriveTitle}">
+            <h:form id="DrivesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{drivesController.selected != null}">
+                        <p:outputLabel value="Von Datum" for="ioDate" />
+                        <p:calendar id="ioDate" pattern="dd.MM.yyyy" value="#{drivesController.selected.ioDate}" title="#{bundle.EditInOutTitle_ioDate}" required="true" requiredMessage="#{bundle.EditInOutRequiredMessage_ioDate}" showOn="button"/>
+                        
+                        <p:outputLabel value="Bis Datum" for="ioDateBis" />
+                        <p:calendar id="ioDateBis" pattern="dd.MM.yyyy" value="#{drivesController.toDate}" title="Bis datum" required="true" requiredMessage="Bis Datum fehlt" showOn="button"/>
+                        
+                        <p:outputLabel value="Beschreibung" for="ioDesc" />
+                        <p:inputText id="ioDesc" value="#{drivesController.selected.ioDesc}" title="#{bundle.CreateInOutTitle_ioDesc}" required="true" requiredMessage="#{bundle.CreateInOutRequiredMessage_ioDesc}"/>
+                        
+                        <p:outputLabel value="MwSt" for="ioVat" />
+                        <p:inputText id="ioVat" value="#{drivesController.selected.ioVat}" title="#{bundle.CreateInOutTitle_ioVat}" required="true" requiredMessage="#{bundle.CreateInOutRequiredMessage_ioVat}"/>
+                        
+                        <p:outputLabel value="Betrag" for="ioOut" />
+                        <p:inputText id="ioOut" value="#{drivesController.selected.ioOut}" title="#{bundle.CreateInOutTitle_ioOut}" />
+                        
+                        <p:outputLabel value="#{bundle.CreateInOutLabel_ioTimestamp}" for="ioTimestamp" />
+                        <p:calendar readonly="true" id="ioTimestamp" pattern="dd.MM.yyyy HH:mm:ss" value="#{drivesController.selected.ioTimestamp}" title="#{bundle.EditInOutTitle_ioTimestamp}" required="true" requiredMessage="#{bundle.EditInOutRequiredMessage_ioTimestamp}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateInOutLabel_ioPaymentType}" for="ioPaymentType" />
+                        <p:selectOneMenu id="ioPaymentType" value="#{drivesController.selected.ioPaymentType}" required="true" requiredMessage="#{bundle.EditInOutRequiredMessage_ioPaymentType}">
+                            <f:selectItems value="#{paymentTypeController.itemsAvailableSelectOne}"
+                                           var="ioPaymentTypeItem"
+                                           itemValue="#{ioPaymentTypeItem}"
+                                           itemLabel="#{ioPaymentTypeItem.payArt}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateInOutLabel_ioAccount}" for="ioAccount" />
+                        <p:selectOneMenu id="ioAccount" value="#{drivesController.selected.ioAccount}" required="true" requiredMessage="#{bundle.EditInOutRequiredMessage_ioAccount}">
+                            <f:selectItems value="#{accountController.itemsAvailableSelectOne}"
+                                           var="ioAccountItem"
+                                           itemValue="#{ioAccountItem}"
+                                           itemLabel="#{ioAccountItem.accId}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateInOutLabel_ioCurrency}" for="ioCurrency" />
+                        <p:selectOneMenu id="ioCurrency" value="#{drivesController.selected.ioCurrency}" required="true" requiredMessage="#{bundle.EditInOutRequiredMessage_ioCurrency}">
+                            <f:selectItems value="#{currencyController.itemsAvailableSelectOne}"
+                                           var="ioCurrencyItem"
+                                           itemValue="#{ioCurrencyItem}"
+                                           itemLabel="#{ioCurrencyItem.curId}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{drivesController.create}" value="#{bundle.Save}" update="display,:InOutListForm:datalist,:growl" oncomplete="handleSubmit(args,'InOutCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DriveCreateDlg.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

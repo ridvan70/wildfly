@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListInOutTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="InOutListForm">
+                <p:panel header="#{bundle.ListInOutTitle}">
+                    <p:dataTable id="datalist" value="#{inOutController.items}" var="item"
+                                 selectionMode="single" selection="#{inOutController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.ioId}"
+                                 rows="7"
+                                 rowsPerPageTemplate="5,7,10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column sortBy="#{item.ioId}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInOutTitle_ioId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ioId}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.ioDate}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInOutTitle_ioDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ioDate}">
+                                <f:convertDateTime pattern="dd.MM.yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInOutTitle_ioDesc}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ioDesc}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInOutTitle_ioVat}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ioVat}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInOutTitle_ioOut}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ioOut}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInOutTitle_ioIn}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ioIn}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInOutTitle_ioTimestamp}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ioTimestamp}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInOutTitle_ioPaymentType}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ioPaymentType}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInOutTitle_ioAccount}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ioAccount}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInOutTitle_ioCurrency}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ioCurrency}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{inOutController.prepareCreate}" update=":InOutCreateForm" oncomplete="PF('InOutCreateDialog').show()"/>
+                            
+                            <p:commandButton id="createDrivesButton" icon="ui-icon-plus"   value="Create Drives" actionListener="#{drivesController.prepareCreate}" update=":DrivesCreateForm" oncomplete="PF('DrivesCreateDlg').show()"/>
+                            
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":InOutViewForm" oncomplete="PF('InOutViewDialog').show()" disabled="#{empty inOutController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":InOutEditForm" oncomplete="PF('InOutEditDialog').show()" disabled="#{empty inOutController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{inOutController.destroy}" update=":growl,datalist" disabled="#{empty inOutController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="CreateDrives.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>
