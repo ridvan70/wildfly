@@ -90,8 +90,8 @@ public class DrivesController implements Serializable {
             selected.setIoCurrency(new Currency("EUR"));
             selected.setIoTimestamp(new Date());
             selected.setIoVat(0);
-            selected.setIoDate(df.parse("01.01.2015"));
-            toDate = (df.parse("28.02.2015"));
+            selected.setIoDate(df.parse("01.07.2017"));
+            toDate = (df.parse("31.12.2017"));
             selected.setIoDesc("Fahrt nach CB Hochheim-FFM 70 Km.");
             selected.setIoOut(21f);
             selected.setIoAccount(getFahrtkostenAccount());
